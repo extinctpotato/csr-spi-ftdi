@@ -1,0 +1,31 @@
+name: GitHub Actions with apt install
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: debian:bookworm
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: |
+          dpkg --add-architecture i386 && \
+            apt-get update && \
+            apt-get install -y build-essential gcc-multilib g++-multilib \
+            libwine-dev:i386 libc6-dev-i386 libstdc++-12-dev:i386 libftdi-dev:i386
+
+      - name: Build
+        run: make -f Makefile.wine
+
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: csr-spi-ftdi-wine
+          path: |
+            lib-wine-linux/**
+            obj-wine-linux/**
