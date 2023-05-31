@@ -71,7 +71,7 @@ static size_t spi_err_buf_sz = 0;
 
 static struct spi_pins *spi_pins;
 static struct spi_pins spi_pin_presets[] = SPI_PIN_PRESETS;
-static enum spi_pinouts spi_pinout = SPI_PINOUT_DEFAULT;
+static enum spi_pinouts spi_pinout = SPI_PINOUT_HWSPI;
 
 void spi_set_err_buf(char *buf, size_t sz)
 {
