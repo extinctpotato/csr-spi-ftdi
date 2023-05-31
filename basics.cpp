@@ -346,6 +346,7 @@ static int spifns_sequence_setvar(const char *szName, const char *szValue) {
 
                     cp = val;
                     lvl = 0;
+		    lvl |= LOG_FLAGS_DUMP;
                     while ((tok = strtok(cp, ",")) != NULL) {
                         cp = NULL;
                         switch (toupper(tok[0])) {
